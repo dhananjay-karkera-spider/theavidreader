@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Sample Blob App</title>
+  <meta name="description" content="Landing page">
+  <meta name="author" content="Dhananjay K">
+
+  <style>
+      div { 
+        border: 1px solid darkslategray;
+        width: 50%;
+      }
+      p {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-weight: 200;
+          font-size: 1.5em;
+          margin-left: 20px;
+      }
+  </style>
+  
+</head>
+
+<body>
+    
+    <div>
+        <p>Landing Page</p>
+        <span id="response">
+
+        </span>
+    </div>
+    <script type="module">
+            import {WeatherService, WeatherResponse} from './scripts/weatherapp.js'    
+            var weatherApp = new WeatherService();
+            weatherApp.getLocalWeather('1234')
+                .then(result => {
+            //let response = `The weather at ${result.place}: Temperature: ${result.temperature}, Humidity: ${result.humidity}`;
+            if (result !== undefined) {
+                //console.log(result.place + ' ' + result.temperature + ' ' + result.humidity);
+                document.getElementById('response').innerText = result.place + ' ' + result.temperature + ' ' + result.humidity;
+            }
+        });
+        </script>
+</body>
+</html>

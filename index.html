@@ -1,0 +1,90 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Azure Fnction Demo</title>
+	<meta name="description" content="Azure function demo app">
+	<meta name="author" content="Dhananjay K">
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+	<template id="dictionary-widget-template">
+		<style>
+			li {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				font-weight: 200;
+				font-size: 0.9em;
+				width: 98%;
+				margin:0px;
+				padding:2px;
+				border-bottom:1px dashed darkslategray
+			}
+
+			li div {
+				width : 100%;
+			}
+
+			.dictionary-widget-template-category {
+				font-style: italic;
+			}
+
+			.dictionary-widget-template-word {
+				font-weight:bold;
+				width:100%;
+				background-color: lightblue;
+			}
+			.dictionary-widget-template-definition {
+				font-size: 0.8em;
+				width:100%;
+			}
+		</style>
+		<li>
+			<div>
+				<span class="dictionary-widget-template-word">
+					<slot name="word">Word</slot>
+				</span>
+				<span class="dictionary-widget-template-category">
+					<slot name="category">Noun/Adjective/Verb</slot>
+				</span>				
+				<p class="dictionary-widget-template-definition">
+					<slot name="definition">definition</slot>
+				</p>
+			</div>
+		</li>
+	</template>
+
+	<div class="container">
+		<section class="content">
+				<p class="title">Excerpt from
+					<i>Adventures of Tom Sawyer</i> by Mark Twain</p>
+
+				<p>Shortly Tom came upon the juvenile pariah of the village, Huckleberry Finn, son of the town drunkard. Huckleberry was
+					cordially hated and dreaded by all the mothers of the town, because he was idle and lawless and vulgar and bad--and
+					because all their children admired him so, and delighted in his forbidden society, and wished they dared to be like
+					him. Tom was like the rest of the respectable boys, in that he envied Huckleberry his gaudy outcast condition, and was
+					under strict orders not to play with him. So he played with him every time he got a chance. Huckleberry was always dressed
+					in the cast-off clothes of full-grown men, and they were in perennial bloom and fluttering with rags. His hat was a
+					vast ruin with a wide crescent lopped out of its brim; his coat, when he wore one, hung nearly to his heels and had
+					the rearward buttons far down the back; but one suspender supported his trousers; the seat of the trousers bagged low
+					and contained nothing, the fringed legs dragged in the dirt when not rolled up.</p>
+			</section>
+		</section>
+		<section class="sidebar">
+			<ul id="wordList">
+
+			</ul>
+		</section>
+	</div>
+</body>
+<script type="module">
+	import { AppController } from './scripts/main.js'
+	const appController = new AppController();	
+</script>
+
+</html>
