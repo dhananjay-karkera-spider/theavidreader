@@ -36,10 +36,29 @@ class AppController {
         }
     }
 
+    //Trim the spaces at the end of the selection
+    getCollapsedSelection() {
+        let selection = window.getSelection();
+        let content = selection.toString();
+
+        if (/\s+$/.test(content)) {
+            let r = selection.getRangeAt(0);
+            let clonedRange = r.cloneRange();
+            //let contentLength = content.length - content.match(/\s+$/).length;            
+            clonedRange.setEnd(clonedRange.endContainer, clonedRange.endOffset - content.match(/\s+$/).length)
+            console.log(clonedRange.endContainer.textContent);
+            selection.removeAllRanges();
+            selection.addRange(clonedRange);
+        }
+        console.log('end of getCollapsedSelection:' + selection.toString() + ' length:' + selection.toString().length);
+        return selection;
+    }
+
+
     addToWordList(word, dictionaryReferences) {
         let wordList = document.querySelector('#wordList');
         dictionaryReferences.forEach(dr => {
-            var category = this.getLexicalCategory(dr.lexicalCategory.trim());
+            let category = this.getLexicalCategory(dr.lexicalCategory.trim());
             let dw = new DictionaryWidget(word, category, dr.definitions[0]);
             wordList.appendChild(dw);
             if (dr.moreEntries != null) {
@@ -64,28 +83,7 @@ class AppController {
         return `(${result})`;
     }
 
-    //Trim the spaces at the end of the selection
-    getCollapsedSelection() {
-        let selection = window.getSelection();
-        let content = selection.toString();
-
-        if (/\s+$/.test(content)) {
-            let r = selection.getRangeAt(0);
-            let clonedRange = r.cloneRange();
-            console.log('getCollapsedSelection content:' + content + ' length' + content.length);
-            let contentLength = content.length - content.match(/\s+$/).length;
-            console.log('trimmed content len:' + contentLength);
-            var startNode = clonedRange.startContainer;
-            console.log('startNode content:' + startNode.textContent);
-            console.log('startNode length:' + startNode.textContent.length);
-            clonedRange.setEnd(startNode, contentLength);
-            selection.removeAllRanges();
-            selection.addRange(clonedRange);
-        }
-        console.log('end of getCollapsedSelection:' + selection.toString() + ' length:' + selection.toString().length);
-        return selection;
-    }
-
+    
     isValid(selection) {
         if (selection === null || selection === undefined)
             return false;
@@ -104,24 +102,9 @@ class AppController {
         let reference = document.createTextNode(this.referenceCount);
         crossReference.appendChild(reference);
 
-        /*var link = document.createElement('a');
-        var linkText = document.createTextNode(this.referenceCount);
-        link.appendChild(linkText);
-        link.title = this.referenceCount;
-        link.href = "#";
-        crossReference.appendChild(link);*/
-
         let r = selection.getRangeAt(0);
         r.surroundContents(mark);
-        r.collapse(false);
-        r.insertNode(crossReference);
-        //selection.addRange(cloneRange);
-
-        //range.appendChild(crossReference);
-        //
-        //range.insertNode(mark);
-
-        //selection.addRange(range);
-        console.log(selection.toString());
+        //r.collapse(false);
+        //r.insertNode(crossReference);
     }
 }

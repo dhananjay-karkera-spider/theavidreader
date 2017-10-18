@@ -1,11 +1,10 @@
 export { DictionaryWidget }
 
 class DictionaryWidget extends HTMLElement {
-    //constructor() {
+
     constructor(word, category, definition) {
         super();
 
-        console.log('creating dictionarywidget');
         this.word = word;
         this.category = category;
         this.definition = definition;
@@ -25,14 +24,12 @@ class DictionaryWidget extends HTMLElement {
 
     // A getter/setter for an open property.
     get word() {
-        console.log('get word');
         return this.hasAttribute('word');;
     }
 
     set word(val) {
         // Reflect the value of the open property as an HTML attribute.
         if (val) {
-            console.log('get word');
             this.setAttribute('word', val);
         } else {
             this.removeAttribute('word');
@@ -41,14 +38,12 @@ class DictionaryWidget extends HTMLElement {
 
     // A getter/setter for an open property.
     get category() {
-        console.log('get category');
         return this.hasAttribute('category');
     }
 
     set category(val) {
         // Reflect the value of the open property as an HTML attribute.
         if (val) {
-            console.log('category')
             this.setAttribute('category', val);
         } else {
             this.removeAttribute('category');
@@ -63,7 +58,6 @@ class DictionaryWidget extends HTMLElement {
     set definition(val) {
         // Reflect the value of the open property as an HTML attribute.
         if (val) {
-            console.log('get definition');
             this.setAttribute('definition', val);
         } else {
             this.removeAttribute('definition');
@@ -75,11 +69,9 @@ class DictionaryWidget extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log('connectedCallback');
     }
 
     attributeChangedCallback(attrName, oldVal, newVal) {
-        console.log(attrName + ' changed from ' + oldVal + ' to ' + newVal);
         //this.setAttribute(attrName, newVal);        
     }
 }

@@ -18,7 +18,10 @@
 .sidebar { 
 	grid-column: 2 / 2;
 	grid-row: 1;
-	border-left:1px solid darkgray
+	border-left:1px solid darkgray;
+	overflow-y: scroll;
+	justify-content: center;
+	align-content: center;
 }
 
 p {
